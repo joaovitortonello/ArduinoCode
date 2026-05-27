@@ -1,0 +1,41 @@
+//Definindo duas constantes inteira sendo elas uma entrada analógica, e outra uma saída digital.
+const int analogicIn = A5;
+const int digitalOut = 11;
+
+//Criando duas variáveis inteiras e locais, sendo uma para o valor recebido e outro valor mandado. 
+int sensorValue = 0;
+int sensorOut = 0;
+
+void setup() {
+
+  //Vai configurar o pino 8 e 11 para uma saída estável, evitando aceitar qualquer valor ou algum curto.
+  pinMode(8, OUTPUT);
+  pinMode(11, OUTPUT);
+
+  //Vai sinalizar que o sistema foi incializado ou resetado.
+  digitalWrite(8 , HIGH);
+  delay(1000);
+  digitalWrite(8, LOW);
+
+}
+
+void loop() {
+
+  //Vai ler o valor analógico do pino A5.
+  sensorValue = analogRead(analogicIn);
+
+  //Converte de até 1023 para até 255.
+  sensorOut = map(sensorValue, 0, 1023, 0, 255);
+
+  //Se o sensor der um valor superior a 200 ele acende a LED (Ligth Emitter Diodo).
+  if(sensorOut > 200) {
+
+    digitalWrite(digitalOut, HIGH);
+
+  } else {
+
+    digitalWrite(digitalOut, LOW);
+
+  }
+
+}
